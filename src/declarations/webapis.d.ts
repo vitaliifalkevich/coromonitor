@@ -10,7 +10,7 @@ type ItemType =
   | 'AUTO_RECURRING_SUBSCRIPTION'
   | 'ALL'
 
-export interface ISuccessItems {
+export interface ISuccessItem {
   mItemId: string
   mItemName: string
   mItemPrice: string
@@ -28,10 +28,10 @@ export interface ISuccessItems {
   mJsonString: string
 }
 
-interface ISuccess {
+export interface ISuccess {
   mErrorCode: number
   mErrorString: string
-  _items: ISuccessItems[]
+  _items: ISuccessItem[]
 }
 
 interface InApppurchase {
@@ -53,6 +53,11 @@ interface InApppurchase {
     startNumber: number,
     endNumber: number,
     type: ItemType,
+    successCallback: (response: ISuccess) => void,
+    errorCallback: (JsonObject) => void,
+  ) => void
+  getPurchasedItemListByIds: (
+    subscriptionId: string,
     successCallback: (response: ISuccess) => void,
     errorCallback: (JsonObject) => void,
   ) => void
