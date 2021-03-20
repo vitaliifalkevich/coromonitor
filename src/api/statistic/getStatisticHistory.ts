@@ -1,10 +1,11 @@
 import axios from 'axios'
 import config from 'config'
 import axiosConfig from './axiosConfig'
+const { getUrl, URL_GET_STATISTIC_HISTORY } = config
 
 const getStatisticHistory = async (countryName: string) =>
   await axios.get(
-    `${config.URL_GET_STATISTIC_HISTORY}?country=${countryName}`,
+    getUrl(`${URL_GET_STATISTIC_HISTORY}?country=${countryName}`),
     axiosConfig,
   )
 

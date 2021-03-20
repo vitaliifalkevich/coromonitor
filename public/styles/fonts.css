@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'Qanelas ExtraBold';
+  src: url('../fonts/extraBold.eot');
+  src: url('../fonts/extraBold.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/extraBold.woff2') format('woff2'),
+  url('../fonts/extraBold.woff') format('woff'),
+  url('../fonts/extraBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Qanelas Regular';
+  src: url('../fonts/regular.eot');
+  src: url('../fonts/regular.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/regular.woff2') format('woff2'),
+  url('../fonts/regular.woff') format('woff'),
+  url('../fonts/regular.ttf') format('truetype');
+}

@@ -4,8 +4,11 @@ import Global from 'pages/Global'
 import Settings from 'pages/Settings'
 import ByCountry from 'pages/ByCountry'
 import ChartStatistic from 'pages/ChartStatistic'
+import useInjectedEntities from 'components/PreloadedEntities/useInjectedEntities'
 
 const App: React.FC = () => {
+  useInjectedEntities()
+
   return (
     <Router>
       <Switch>

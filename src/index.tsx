@@ -2,11 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from 'pages/App'
 import { Provider } from 'react-redux'
+import { ThemeProvider } from 'styles/theme/ThemeProvider'
 // Use consistent styling
 import 'sanitize.css/sanitize.css'
 import { configureAppStore } from 'store/configureStore'
-
-import { ThemeProvider } from 'styles/theme/ThemeProvider'
+import GlobalStyle from 'styles/global-styles'
 
 const store = configureAppStore()
 const MOUNT_NODE = document.getElementById('root') as HTMLElement
@@ -15,7 +15,10 @@ ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider>
       <React.StrictMode>
-        <App />
+        <>
+          <App />
+          <GlobalStyle />
+        </>
       </React.StrictMode>
     </ThemeProvider>
   </Provider>,

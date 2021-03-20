@@ -1,10 +1,24 @@
-const lightTheme = {}
+const lightTheme = {
+  fonts: {
+    extraBold: 'Qanelas ExtraBold, serif',
+    regular: 'Qanelas Regular, serif',
+  },
+  mode: 'light',
+}
 
-const darkTheme: Theme = {}
+const darkTheme: Theme = {
+  fonts: {
+    extraBold: 'Qanelas ExtraBold, serif',
+    regular: 'Qanelas Regular, serif',
+  },
+  mode: 'dark',
+}
 
 export type Theme = typeof lightTheme
 
-export const themes = {
+const themes = {
   light: lightTheme,
   dark: darkTheme,
 }
+
+export default themes
