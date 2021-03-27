@@ -6,9 +6,8 @@ const initialState: IState = {
   countries: {
     isLoading: false,
     data: [],
-    errors: '',
+    error: null,
   },
-  countChosenCountries: 0,
   currentPage: 0,
 }
 

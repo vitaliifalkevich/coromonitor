@@ -1,11 +1,8 @@
 import styled from 'styled-components'
+import background from 'assets/img/settingsBg.png'
 
 const Container = styled.div`
-  position: absolute;
-  width: 150px;
-  left: 50%;
-  margin-left: -75px;
-  margin-top: 100px;
+  background: url(${background}) no-repeat;
 `
 
 export default Container

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import App from 'pages/App'
 import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styles/theme/ThemeProvider'
-// Use consistent styling
 import 'sanitize.css/sanitize.css'
 import { configureAppStore } from 'store/configureStore'
 import GlobalStyle from 'styles/global-styles'

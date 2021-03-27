@@ -7,8 +7,7 @@ export interface IState {
   countries: {
     isLoading: boolean
     data: ICountry[]
-    errors: string[] | string
+    error: null | string
   }
-  countChosenCountries: number
   currentPage: number
 }

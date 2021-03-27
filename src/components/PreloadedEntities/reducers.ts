@@ -1,6 +1,5 @@
 import { IState, ICountry } from './types'
 import { PayloadAction } from '@reduxjs/toolkit'
-import { prepareCountries } from './normalization'
 
 export const getAffectedCountries = (state: IState) => {
   state.countries.isLoading = true
@@ -8,25 +7,18 @@ export const getAffectedCountries = (state: IState) => {
 
 export const setAffectedCountries = (
   state: IState,
-  action: PayloadAction<string[]>,
+  action: PayloadAction<ICountry[]>,
 ) => {
-  state.countries.data = prepareCountries(action.payload)
+  state.countries.data = action.payload
   state.countries.isLoading = false
 }
 
 export const setErrorsAffectedCountries = (
   state: IState,
-  action: PayloadAction<string[] | string>,
+  action: PayloadAction<null | string>,
 ) => {
   state.countries.isLoading = false
-  state.countries.errors = action.payload
-}
-
-export const setCountChosenCountries = (
-  state: IState,
-  action: PayloadAction<number>,
-) => {
-  state.countChosenCountries = action.payload
+  state.countries.error = action.payload
 }
 
 export const changeCurrentPage = (
@@ -38,7 +30,20 @@ export const changeCurrentPage = (
 
 export const followCountry = (
   state: IState,
-  payload: PayloadAction<ICountry[]>,
+  action: PayloadAction<ICountry[]>,
 ) => {
   return state
+}
+
+export const changeFollowCountryStatus = (
+  state: IState,
+  action: PayloadAction<ICountry>,
+) => {
+  const originalCountries = state.countries.data
+  const { name, isChosen } = action.payload
+
+  state.countries.data = originalCountries.map(country => {
+    if (country.name === name) return { ...country, isChosen }
+    return country
+  })
 }
