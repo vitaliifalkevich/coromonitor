@@ -1,29 +1,29 @@
-import { ResultCallbackPay, CommonError } from './types'
+import { CommonError } from './types'
 import { IAPMode, ISuccess } from 'declarations/webapis'
 
-export function pay(
+export const pay = (
   itemId: string,
-  returnResultCallback: ResultCallbackPay,
   paymentMode: IAPMode = 'IAP_SUCCESS_TEST_MODE',
-) {
-  function onsuccessCB(item: ISuccess) {
-    returnResultCallback(item)
-  }
+) =>
+  new Promise((resolve, reject) => {
+    function onsuccessCB(item: ISuccess) {
+      resolve(item)
+    }
 
-  function onerrorCB(err: CommonError) {
-    returnResultCallback(null, { errorName: err.name, errorMsg: err.message })
-  }
+    function onerrorCB(err: CommonError) {
+      reject({ errorName: err.name, errorMsg: err.message })
+    }
 
-  /* TODO change IAP_SUCCES_TEST_MODE to IAP_COMMERCIAL_MODE */
+    /* TODO change IAP_SUCCES_TEST_MODE to IAP_COMMERCIAL_MODE */
 
-  try {
-    window.webapis.inapppurchase.startPayment(
-      itemId,
-      paymentMode,
-      onsuccessCB,
-      onerrorCB,
-    )
-  } catch (e) {
-    returnResultCallback(null, { errorName: e.name, errorMsg: e.message })
-  }
-}
+    try {
+      window.webapis.inapppurchase.startPayment(
+        itemId,
+        paymentMode,
+        onsuccessCB,
+        onerrorCB,
+      )
+    } catch (e) {
+      reject({ errorName: e.name, errorMsg: e.message })
+    }
+  })

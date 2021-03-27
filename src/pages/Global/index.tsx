@@ -60,33 +60,28 @@ const Global: React.FC = () => {
   })
 
   return (
-    <>
-      <div className="ui-page ui-page-active" {...onDoubleTap}>
-        <Pagination />
-        <Logo />
-        {isLoading ? (
-          <Spinner />
-        ) : !errorMsg ? (
-          <InfoCases
-            statisticDate={results?.statistic_taken_at}
-            totalCases={results?.total_cases}
-            totalRecovered={results?.total_recovered}
-            totalDeaths={results?.total_deaths}
-          />
-        ) : (
-          <ErrorHandler
-            errorMsg={errorMsg}
-            error={ERRORS.ERROR_DATA_FETCHING}
-          />
-        )}
-        {countriesToFollow.length > 0 && (
-          <BtnNavigate
-            btnType={btnTypes.next}
-            countryName={countriesToFollow[0].name}
-          />
-        )}
-      </div>
-    </>
+    <div className="ui-page ui-page-active" {...onDoubleTap}>
+      <Pagination />
+      <Logo />
+      {isLoading ? (
+        <Spinner />
+      ) : !errorMsg ? (
+        <InfoCases
+          statisticDate={results?.statistic_taken_at}
+          totalCases={results?.total_cases}
+          totalRecovered={results?.total_recovered}
+          totalDeaths={results?.total_deaths}
+        />
+      ) : (
+        <ErrorHandler errorMsg={errorMsg} error={ERRORS.ERROR_DATA_FETCHING} />
+      )}
+      {countriesToFollow.length > 0 && (
+        <BtnNavigate
+          btnType={btnTypes.next}
+          countryName={countriesToFollow[0].name}
+        />
+      )}
+    </div>
   )
 }
 

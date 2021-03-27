@@ -2,7 +2,10 @@ import { IState } from './types'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { IResult } from './types'
 
-export const getStatisticByCountry = (state: IState) => {
+export const getStatisticByCountry = (
+  state: IState,
+  action: PayloadAction<string>,
+) => {
   state.isLoading = true
 }
 
@@ -16,8 +19,15 @@ export const setStatisticByCountry = (
 
 export const setErrorsStatisticByCountry = (
   state: IState,
-  action: PayloadAction<string[]>,
+  action: PayloadAction<string>,
 ) => {
   state.isLoading = false
-  state.errors = action.payload
+  state.error = action.payload
+}
+
+export const getFakeButActualStatisticByCountry = (
+  state: IState,
+  action: PayloadAction<string>,
+) => {
+  state.isLoading = true
 }

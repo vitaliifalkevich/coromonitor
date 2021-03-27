@@ -22,5 +22,5 @@ export interface IResult {
 export interface IState {
   isLoading: boolean
   results: IResult | null
-  errors: string[] | null
+  error: string | null
 }

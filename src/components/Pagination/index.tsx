@@ -16,17 +16,26 @@ const Pagination: React.FC<PaginationProps> = ({ countryName }) => {
   const currentPage = useSelector(getCurrentPage)
 
   const paginationDots = useMemo(() => {
-    let paginationDotsOrigin = countriesToFollow.map((item, idx) => (
+    let pagination = countriesToFollow.map((item, idx) => (
       <PaginationDot key={`pagination_dots_${idx}`} />
     ))
 
-    paginationDotsOrigin.splice(
-      currentPage,
-      0,
-      <PaginationDot key={`pagination_dot_active`} isActive={true} />,
-    )
-    return paginationDotsOrigin
-  }, [countriesToFollow, currentPage])
+    if (countryName) {
+      pagination.splice(
+        currentPage + 1,
+        0,
+        <PaginationDot key={`pagination_dot_active`} isActive={true} />,
+      )
+    } else {
+      pagination.splice(
+        currentPage,
+        0,
+        <PaginationDot key={`pagination_dot_active`} isActive={true} />,
+      )
+    }
+
+    return pagination
+  }, [countriesToFollow, currentPage, countryName])
 
   return (
     <LocalThemeProvider themes={themes}>

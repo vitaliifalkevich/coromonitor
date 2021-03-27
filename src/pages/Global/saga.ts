@@ -1,4 +1,12 @@
-import { takeLatest, call, put, all, fork, select } from 'redux-saga/effects'
+import {
+  takeLatest,
+  call,
+  put,
+  all,
+  fork,
+  select,
+  delay,
+} from 'redux-saga/effects'
 import { actions } from './slice'
 import { getGlobalStatistic } from 'api'
 import { GlobalStaticResponse } from 'api/types'
@@ -22,6 +30,7 @@ function* getFakeButActualStatistic() {
   )
   if (!currentStatistic) yield fork(getStatistic)
   else {
+    yield delay(800)
     yield put(actions.setGlobalStatistic(currentStatistic))
   }
 }

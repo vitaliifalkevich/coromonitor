@@ -5,7 +5,7 @@ import * as reducers from './reducers'
 const initialState: IState = {
   isLoading: false,
   results: null,
-  errors: null,
+  error: null,
 }
 
 const slice = createSlice({

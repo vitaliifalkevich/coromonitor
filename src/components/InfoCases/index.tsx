@@ -11,18 +11,20 @@ interface InfoCasesProps {
   totalCases?: string
   totalRecovered?: string
   totalDeaths?: string
+  countryName?: string
 }
 const InfoCases: React.FC<InfoCasesProps> = ({
   statisticDate,
   totalCases,
   totalRecovered,
   totalDeaths,
+  countryName,
 }) => {
   return (
     <LocalThemeProvider themes={themes}>
       <>
         <h2>
-          Globally{' '}
+          {countryName ? `${countryName} ` : 'Globally '}
           {statisticDate && (
             <LastCheck>{format(new Date(statisticDate), 'hh:mm:ss')}</LastCheck>
           )}
@@ -45,6 +47,9 @@ const InfoCases: React.FC<InfoCasesProps> = ({
           </Case>
         </CasesContainer>
         <Icon iconType={iconTypes.settings} />
+        {countryName && (
+          <Icon iconType={iconTypes.trash} countryName={countryName} />
+        )}
       </>
     </LocalThemeProvider>
   )
