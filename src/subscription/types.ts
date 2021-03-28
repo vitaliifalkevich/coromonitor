@@ -1,19 +1,9 @@
+import { CommonError } from '../api/tizen/types'
+
 export interface IItemForPurchaseResponse {
-  mItemId: string
   mItemName: string
+  mItemId: string
   mItemPrice: string
-  mItemPriceString: string
-  mCurrencyUnit: string
-  mCurrencyCode: string
-  mItemDesc: string
-  mItemImageUrl: string
-  mItemDownloadUrl: string
-  mType: string
-  mPaymentId: string
-  mPurchaseId: string
-  mPurchaseDate: string
-  mSubscriptionEndDate: string
-  mJsonString: string
 }
 
 export interface IItemForPurchase extends IItemForPurchaseResponse {
@@ -29,17 +19,17 @@ export interface IState {
   tariffsForPurchase: {
     isLoading: boolean
     data: IItemForPurchase[]
-    error: null | string
+    error: null | CommonError
   }
   purchasedTariff: {
     isLoading: boolean
     needSubscription: boolean
     mayTrial: boolean
-    error: null | string
+    error: null | CommonError
   }
   payment: {
     isLoading: boolean
     success: ISuccessPayment
-    error: string | null
+    error: null | CommonError
   }
 }

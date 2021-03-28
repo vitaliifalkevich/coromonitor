@@ -12,6 +12,8 @@ const config = {
   LIMIT_REQUEST_TIME: 300,
   BASE_DIRECTORY: 'coromonitor',
   chosenCountriesFileName: 'chosenCountries',
+  paymentSuccessStatus: 'Success',
+  paymentSuccessDescription: 'Your subscription is active',
 }
 
 export default config

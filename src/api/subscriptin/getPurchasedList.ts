@@ -1,7 +1,9 @@
 import { CommonError } from './types'
-import { ISuccess } from 'declarations/webapis'
+import { ISuccess, ISuccessItem } from 'declarations/webapis'
 
-export const getPurchasedList = (subscriptionId: string) =>
+export const getPurchasedList = (
+  subscriptionId: string,
+): Promise<ISuccessItem[] | CommonError> =>
   new Promise((resolve, reject) => {
     function onsuccessCB(list: ISuccess) {
       if (list._items.length === 0) {
@@ -12,7 +14,7 @@ export const getPurchasedList = (subscriptionId: string) =>
     }
 
     function onerrorCB(e: CommonError) {
-      reject({ errorName: e.name, errorMsg: e.message })
+      reject({ name: e.name, message: e.message })
     }
 
     window.webapis.inapppurchase.getPurchasedItemListByIds(

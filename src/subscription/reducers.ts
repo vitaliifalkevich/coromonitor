@@ -1,5 +1,9 @@
 import { IState, IItemForPurchase } from './types'
 import { PayloadAction } from '@reduxjs/toolkit'
+import config from '../config'
+import { CommonError } from '../api/tizen/types'
+
+const { paymentSuccessStatus, paymentSuccessDescription } = config
 
 export const getItemsForPurchasing = (state: IState) => {
   state.tariffsForPurchase.isLoading = true
@@ -16,7 +20,7 @@ export const setItemsForPurchasing = (
 
 export const setErrorItemsForPurchasing = (
   state: IState,
-  action: PayloadAction<string>,
+  action: PayloadAction<CommonError>,
 ) => {
   state.tariffsForPurchase.isLoading = false
   state.tariffsForPurchase.error = action.payload
@@ -31,14 +35,14 @@ export const startPaymentProcess = (
 
 export const successPaymentProcess = (state: IState) => {
   state.payment.isLoading = false
-  state.payment.success.title = 'Success'
-  state.payment.success.description = 'Your subscription is active'
+  state.payment.success.title = paymentSuccessStatus
+  state.payment.success.description = paymentSuccessDescription
   state.payment.error = null
 }
 
 export const errorPaymentProcess = (
   state: IState,
-  action: PayloadAction<string>,
+  action: PayloadAction<CommonError>,
 ) => {
   state.payment.isLoading = false
   state.payment.error = action.payload
@@ -75,7 +79,7 @@ export const successCheckingPurchased = (
 
 export const errorCheckingPurchased = (
   state: IState,
-  action: PayloadAction<string>,
+  action: PayloadAction<CommonError>,
 ) => {
   state.purchasedTariff.isLoading = false
   state.purchasedTariff.needSubscription = true

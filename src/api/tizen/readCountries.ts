@@ -1,7 +1,7 @@
 import config from 'config'
 import { File } from 'tizen-common-web'
 
-const readCountries = () =>
+const readCountries = (): Promise<string | null> =>
   new Promise((resolve, reject) => {
     window.tizen.filesystem.resolve('documents', function (dir) {
       function onsuccess(files: File[]) {

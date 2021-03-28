@@ -1,13 +1,15 @@
 import { CommonError } from './types'
-import { ISuccess } from '../../declarations/webapis'
+import { ISuccess, ISuccessItem } from '../../declarations/webapis'
 
-export const getAvailablePurchaseItems = () =>
+export const getAvailablePurchaseItems = (): Promise<
+  ISuccessItem[] | CommonError
+> =>
   new Promise((resolve, reject) => {
     function onsuccessCB(list: ISuccess) {
       if (list._items.length === 0) {
         reject({
-          errorName: 'Empty',
-          errorMsg: 'No tariffs',
+          name: 'Empty',
+          message: 'No tariffs',
         })
       } else {
         resolve(list._items)
@@ -15,7 +17,7 @@ export const getAvailablePurchaseItems = () =>
     }
 
     function onerrorCB(err: CommonError) {
-      reject({ errorName: err.name, errorMsg: err.message })
+      reject({ name: err.name, message: err.message })
     }
     /* TODO change IAP_SUCCES_TEST_MODE to IAP_COMMERCIAL_MODE */
 

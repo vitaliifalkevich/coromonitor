@@ -3,7 +3,7 @@ import { File } from 'tizen-common-web'
 import config from 'config'
 import getDirectory from './getDirectory'
 
-const makeCountryRecord = (countries: string) => {
+const makeCountryRecord = (countries: string): Promise<boolean | string> => {
   return new Promise((resolve, reject) => {
     window.tizen.filesystem.resolve('documents', function (dir) {
       function onsuccess(files: File[]) {
