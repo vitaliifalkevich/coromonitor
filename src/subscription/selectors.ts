@@ -1,9 +1,9 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { getState } from 'store/mainSelector'
 
-export const checkIsNeedSubscription = createSelector(
+export const checkHaveSubscription = createSelector(
   [getState],
-  state => state.subscription?.purchasedTariff.needSubscription,
+  state => state.subscription?.purchasedTariff.haveSubscription,
 )
 
 export const checkMayTrialPeriod = createSelector(

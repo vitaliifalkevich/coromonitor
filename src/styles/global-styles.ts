@@ -27,6 +27,15 @@ h2 {
 }
 .ui-page {
   background: url(${background}) center center no-repeat;
+  width: 360px!important;
+  margin: 0 auto;
+  height: 360px!important;
+  position: relative;
+  border-radius: 50%;
+  .ui-content {
+   width: 106%;
+  }
+
 }
 `
 

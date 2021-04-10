@@ -6,7 +6,7 @@ import { PayloadAction } from '@reduxjs/toolkit'
 import { ICountry } from './types'
 import { getAllCountries } from './selectors'
 
-function* getFollowCountries() {
+function* getFollowCountries(countries?: ICountry[]) {
   const affectedCountries: ICountry[] = yield select(getAllCountries)
 
   const prepareCountries = (
@@ -19,7 +19,10 @@ function* getFollowCountries() {
           ...country,
           isChosen: true,
         }
-      return country
+      return {
+        ...country,
+        isChosen: false,
+      }
     })
 
   try {
@@ -35,7 +38,7 @@ function* getFollowCountries() {
     console.log('tizen api does not works in browser')
     const result =
       '[{"name":"USA","isChosen":true},{"name":"Brazil","isChosen":true}]'
-    const followedCountries = JSON.parse(result)
+    const followedCountries = countries ? countries : JSON.parse(result)
 
     yield put(
       actions.setAffectedCountries(
@@ -75,12 +78,10 @@ function* followCountries(action: PayloadAction<ICountry[]>) {
   const countriesSerialized = JSON.stringify(countries)
   try {
     yield call(() => makeCountryRecord(countriesSerialized))
+    yield fork(getFollowCountries)
   } catch (err) {
-    console.log('tizen api does not works in browser')
-    console.log('serialized countries ', countriesSerialized)
+    yield fork(getFollowCountries, countries)
   }
-
-  yield fork(getFollowCountries)
 }
 
 // watchers

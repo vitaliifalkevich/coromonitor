@@ -19,6 +19,9 @@ const ButtonContainer = styled.button`
     background: ${({ theme }) => theme.colors.buttonActiveColor};
     border: 0.4em solid ${({ theme }) => theme.colors.borderActiveBtn};
     bottom: -7.6em;
+    span {
+      margin-top: -4.7em;
+    }
   }
 `
 

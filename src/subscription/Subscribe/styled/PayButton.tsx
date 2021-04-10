@@ -19,19 +19,17 @@ const PayButton = styled.button`
     background: ${({ theme }) => theme.colors.buttonActiveColor};
     border: 0.4em solid ${({ theme }) => theme.colors.borderActiveBtn};
     bottom: -7.6em;
+    span {
+      margin-top: -4.7em;
+    }
   }
   span {
     color: ${({ theme }) => theme.colors.buttonTextColor};
-    margin-top: -4.8em;
+    margin-top: -5.15em;
     display: block;
     font-family: ${({ theme }) => theme.fonts.extraBold};
     text-transform: uppercase;
-    font-size: 0.95em;
-    &:active,
-    &:focus,
-    &:hover {
-      margin-top: -4.4em;
-    }
+    font-size: 0.9em;
   }
 `
 export default PayButton

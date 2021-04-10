@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import Logo from 'components/Logo'
 import Spinner from 'components/Spinner'
 import AlertSubscription from '../AlertSubscription'
@@ -52,6 +52,10 @@ const Subscribe: React.FC = () => {
     [dispatch],
   )
 
+  useEffect(() => {
+    dispatch(actions.getItemsForPurchasing())
+  }, [dispatch])
+
   return (
     <LocalThemeProvider themes={themes}>
       <div className="ui-page ui-page-active">
@@ -72,21 +76,27 @@ const Subscribe: React.FC = () => {
             )}
             <ItemsForPurchase>
               {itemsToPurchase &&
-                itemsToPurchase.map((item, idx) => (
-                  <Item
-                    key={idx}
-                    isChecked={item.isChecked}
-                    onClick={() => {
-                      onChangeStatus(item.mItemName)
-                    }}
-                  >
-                    <PurchasedTitle>{item.mItemName}</PurchasedTitle>
-                    <Price>{item.mItemPrice}</Price>
-                  </Item>
-                ))}
+                itemsToPurchase.map(
+                  ({ isChecked, mItemName, mItemPrice }, idx) => (
+                    <Item
+                      key={idx}
+                      isChecked={isChecked}
+                      onClick={() => {
+                        onChangeStatus(mItemName)
+                      }}
+                    >
+                      <PurchasedTitle isChecked={isChecked}>
+                        {mItemName}
+                      </PurchasedTitle>
+                      <Price>{mItemPrice}</Price>
+                    </Item>
+                  ),
+                )}
             </ItemsForPurchase>
             {chosenTariff && chosenTariff.length > 0 && (
-              <PayButton onClick={getPay} />
+              <PayButton onClick={getPay}>
+                <span>Subscribe</span>
+              </PayButton>
             )}
           </>
         )}

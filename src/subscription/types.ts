@@ -23,7 +23,7 @@ export interface IState {
   }
   purchasedTariff: {
     isLoading: boolean
-    needSubscription: boolean
+    haveSubscription: boolean
     mayTrial: boolean
     error: null | CommonError
   }

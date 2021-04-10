@@ -8,7 +8,7 @@ const TrialNavigate = styled.button`
   position: absolute;
   width: 11.4em;
   font-size: 0.6em;
-  top: 11.3em;
+  top: 11.5em;
   left: 50%;
   margin-left: -5.7em;
   padding: 0.1em 0.3em;

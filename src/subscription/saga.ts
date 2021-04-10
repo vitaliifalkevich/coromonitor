@@ -44,7 +44,7 @@ function* checkPurchasedItem() {
     if (response.length > 0) {
       yield put(
         actions.successCheckingPurchased({
-          needSubscription: isAfter(
+          haveSubscription: !isAfter(
             Number(response[0].mSubscriptionEndDate),
             new Date(),
           ),
@@ -54,7 +54,7 @@ function* checkPurchasedItem() {
     } else
       yield put(
         actions.successCheckingPurchased({
-          needSubscription: true,
+          haveSubscription: false,
           mayTrial: true,
         }),
       )
@@ -62,7 +62,7 @@ function* checkPurchasedItem() {
     if (!window.tizen) {
       yield put(
         actions.successCheckingPurchased({
-          needSubscription: true,
+          haveSubscription: false,
           mayTrial: true,
         }),
       )
@@ -74,9 +74,21 @@ function* payProcess(action: PayloadAction<string>) {
   try {
     yield call(pay, action.payload)
     yield put(actions.successPaymentProcess())
+    yield put(
+      actions.successCheckingPurchased({
+        haveSubscription: true,
+        mayTrial: false,
+      }),
+    )
   } catch (err) {
     if (!window.tizen) {
       yield put(actions.successPaymentProcess())
+      yield put(
+        actions.successCheckingPurchased({
+          haveSubscription: true,
+          mayTrial: false,
+        }),
+      )
     } else {
       yield put(actions.errorPaymentProcess(err.message))
     }

@@ -20,8 +20,14 @@ import {
 } from './styled'
 import themes from './themes'
 import LocalThemeProvider from 'styles/theme/LocalThemeProvider'
+import { useInjectReducer, useInjectSaga } from 'redux-injectors'
+import { keyName, reducer } from '../slice'
+import saga from '../saga'
 
 const TrialScreenOrExpired: React.FC = () => {
+  useInjectReducer({ key: keyName, reducer })
+  useInjectSaga({ key: keyName, saga })
+
   const dispatch = useDispatch()
   const history = useHistory()
   const isLoadingPurchased = useSelector(getPurchaseTariffLoading)

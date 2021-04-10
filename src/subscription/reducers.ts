@@ -56,10 +56,10 @@ export const changeCheckStatusTariff = (
     if (item.mItemName === action.payload) {
       return {
         ...item,
-        checked: !item.isChecked,
+        isChecked: !item.isChecked,
       }
     }
-    return { ...item, checked: false }
+    return { ...item, isChecked: false }
   })
 }
 
@@ -69,10 +69,10 @@ export const startCheckPurchased = (state: IState) => {
 
 export const successCheckingPurchased = (
   state: IState,
-  action: PayloadAction<{ needSubscription: boolean; mayTrial: boolean }>,
+  action: PayloadAction<{ haveSubscription: boolean; mayTrial: boolean }>,
 ) => {
   state.purchasedTariff.isLoading = false
-  state.purchasedTariff.needSubscription = action.payload.needSubscription
+  state.purchasedTariff.haveSubscription = action.payload.haveSubscription
   state.purchasedTariff.mayTrial = action.payload.mayTrial
   state.purchasedTariff.error = null
 }
@@ -82,7 +82,7 @@ export const errorCheckingPurchased = (
   action: PayloadAction<CommonError>,
 ) => {
   state.purchasedTariff.isLoading = false
-  state.purchasedTariff.needSubscription = true
+  state.purchasedTariff.haveSubscription = false
   state.purchasedTariff.error = action.payload
   state.purchasedTariff.mayTrial = false
 }

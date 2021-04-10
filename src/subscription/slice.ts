@@ -10,8 +10,8 @@ const initialState: IState = {
   },
   purchasedTariff: {
     isLoading: false,
-    needSubscription: true,
-    mayTrial: false,
+    haveSubscription: false,
+    mayTrial: true,
     error: null,
   },
   payment: {
