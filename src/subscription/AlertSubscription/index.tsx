@@ -3,7 +3,7 @@ import Logo from 'components/Logo'
 import { useHistory } from 'react-router-dom'
 import { Title, Message, Button, Text } from './styled'
 import themes from './themes'
-import LocalThemeProvider from 'styles/theme/LocalThemeProvider'
+import ComponentThemeProvider from 'styles/theme/ComponentThemeProvider'
 
 interface AlertSubscriptionProps {
   alertName: string
@@ -23,7 +23,7 @@ const AlertSubscription: React.FC<AlertSubscriptionProps> = ({
   }, [dispatchAction, history])
 
   return (
-    <LocalThemeProvider themes={themes}>
+    <ComponentThemeProvider themes={themes}>
       <div className="ui-page ui-page-active">
         <Logo />
         <Title>{alertName}</Title>
@@ -32,7 +32,7 @@ const AlertSubscription: React.FC<AlertSubscriptionProps> = ({
           <Text>Ok</Text>
         </Button>
       </div>
-    </LocalThemeProvider>
+    </ComponentThemeProvider>
   )
 }
 

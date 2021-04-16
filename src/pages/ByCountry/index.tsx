@@ -9,21 +9,21 @@ import {
   getStatisticByCountryLoading,
   getStatisticByCountryResults,
 } from './selectors'
-import { appExit } from '../../helpers'
+import { appExit } from 'helpers'
 import { useDoubleTap } from 'use-double-tap'
 import { differenceInSeconds } from 'date-fns'
-import config from '../../config'
-import Pagination from '../../components/Pagination'
-import Logo from '../../components/Logo'
-import BtnNavigate from '../../components/BtnNavigate'
-import { btnTypes, ERRORS } from '../../app_constants'
-import Spinner from '../../components/Spinner'
-import InfoCases from '../../components/InfoCases'
-import ErrorHandler from '../../components/ErrorHandler'
+import config from 'config'
+import Pagination from 'components/Pagination'
+import Logo from 'components/Logo'
+import BtnNavigate from 'components/BtnNavigate'
+import { btnTypes, ERRORS } from 'app_constants'
+import Spinner from 'components/Spinner'
+import InfoCases from 'components/InfoCases'
+import ErrorHandler from 'components/ErrorHandler'
 import {
   getCountriesToFollow,
   getCurrentPage,
-} from '../../components/PreloadedEntities/selectors'
+} from 'components/PreloadedEntities/selectors'
 const { LIMIT_REQUEST_TIME } = config
 
 const ByCountry: React.FC = () => {

@@ -8,7 +8,7 @@ interface ProviderProps<T> {
   themes: T
 }
 
-const LocalThemeProvider = (props: ProviderProps<any>) => {
+const ComponentThemeProvider = (props: ProviderProps<any>) => {
   const themeMode = useSelector(selectThemeKey)
   return (
     <OriginalThemeProvider theme={props.themes?.[themeMode]}>
@@ -17,4 +17,4 @@ const LocalThemeProvider = (props: ProviderProps<any>) => {
   )
 }
 
-export default LocalThemeProvider
+export default ComponentThemeProvider

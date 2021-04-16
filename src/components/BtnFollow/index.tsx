@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { ButtonContainer, Text } from './styled'
 import { actions } from 'components/PreloadedEntities/slice'
 import { getCountriesToFollow } from '../PreloadedEntities/selectors'
-import LocalThemeProvider from 'styles/theme/LocalThemeProvider'
+import ComponentThemeProvider from 'styles/theme/ComponentThemeProvider'
 import themes from './themes'
 
 const BtnFollow: React.FC<{ btnType: string }> = ({ btnType }) => {
@@ -19,11 +19,11 @@ const BtnFollow: React.FC<{ btnType: string }> = ({ btnType }) => {
   }, [dispatch, history, countriesToFollow])
 
   return (
-    <LocalThemeProvider themes={themes}>
+    <ComponentThemeProvider themes={themes}>
       <ButtonContainer onClick={onButtonClick}>
         <Text>{btnType}</Text>
       </ButtonContainer>
-    </LocalThemeProvider>
+    </ComponentThemeProvider>
   )
 }
 

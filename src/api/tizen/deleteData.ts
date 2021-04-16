@@ -1,7 +1,7 @@
 import config from 'config'
 const deleteData = () => {
   window.tizen.filesystem.resolve('documents', function (dir) {
-    /* Firstly choose what to delete */
+    /* Firstly chosen what to delete */
     const fileToDelete = dir.resolve(
       `${config.BASE_DIRECTORY}/${config.chosenCountriesFileName}.txt`,
     )

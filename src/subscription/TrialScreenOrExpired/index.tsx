@@ -19,7 +19,7 @@ import {
   TrialNavigate,
 } from './styled'
 import themes from './themes'
-import LocalThemeProvider from 'styles/theme/LocalThemeProvider'
+import ComponentThemeProvider from 'styles/theme/ComponentThemeProvider'
 import { useInjectReducer, useInjectSaga } from 'redux-injectors'
 import { keyName, reducer } from '../slice'
 import saga from '../saga'
@@ -54,7 +54,7 @@ const TrialScreenOrExpired: React.FC = () => {
   }, [history])
 
   return (
-    <LocalThemeProvider themes={themes}>
+    <ComponentThemeProvider themes={themes}>
       <div className="ui-page ui-page-active" {...onDoubleTap}>
         <Logo />
         {isLoadingPurchased ? (
@@ -85,7 +85,7 @@ const TrialScreenOrExpired: React.FC = () => {
           </>
         )}
       </div>
-    </LocalThemeProvider>
+    </ComponentThemeProvider>
   )
 }
 

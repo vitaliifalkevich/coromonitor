@@ -10,7 +10,7 @@ import {
   PurchasedTitle,
   Price,
 } from './styled'
-import LocalThemeProvider from 'styles/theme/LocalThemeProvider'
+import ComponentThemeProvider from 'styles/theme/ComponentThemeProvider'
 import themes from './themes'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -57,7 +57,7 @@ const Subscribe: React.FC = () => {
   }, [dispatch])
 
   return (
-    <LocalThemeProvider themes={themes}>
+    <ComponentThemeProvider themes={themes}>
       <div className="ui-page ui-page-active">
         <Logo />
         {isTariffsLoading ? (
@@ -101,7 +101,7 @@ const Subscribe: React.FC = () => {
           </>
         )}
       </div>
-    </LocalThemeProvider>
+    </ComponentThemeProvider>
   )
 }
 

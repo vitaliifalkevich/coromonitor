@@ -10,7 +10,7 @@ import {
 import Spinner from 'components/Spinner'
 import ErrorHandler from 'components/ErrorHandler'
 import { ERRORS } from 'app_constants'
-import LocalThemeProvider from 'styles/theme/LocalThemeProvider'
+import ComponentThemeProvider from 'styles/theme/ComponentThemeProvider'
 import themes from './themes'
 import Country from './Country'
 import BtnFollow from 'components/BtnFollow'
@@ -23,7 +23,7 @@ const Settings: React.FC = () => {
   const countriesToFollow = useSelector(getCountriesToFollow)
 
   return (
-    <LocalThemeProvider themes={themes}>
+    <ComponentThemeProvider themes={themes}>
       <Container className="ui-page ui-page-active">
         {isLoading ? (
           <Spinner />
@@ -50,7 +50,7 @@ const Settings: React.FC = () => {
           />
         )}
       </Container>
-    </LocalThemeProvider>
+    </ComponentThemeProvider>
   )
 }
 

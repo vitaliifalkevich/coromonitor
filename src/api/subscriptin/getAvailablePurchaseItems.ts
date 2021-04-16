@@ -19,7 +19,6 @@ export const getAvailablePurchaseItems = (): Promise<
     function onerrorCB(err: CommonError) {
       reject({ name: err.name, message: err.message })
     }
-    /* TODO change IAP_SUCCES_TEST_MODE to IAP_COMMERCIAL_MODE */
 
     window.webapis.inapppurchase.getItemList(
       1,

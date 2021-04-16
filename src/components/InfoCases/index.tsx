@@ -3,7 +3,7 @@ import { LastCheck, CasesContainer, Case } from './styled'
 import { format } from 'date-fns'
 import { iconTypes } from 'app_constants'
 import Icon from 'components/Icon'
-import LocalThemeProvider from 'styles/theme/LocalThemeProvider'
+import ComponentThemeProvider from 'styles/theme/ComponentThemeProvider'
 import themes from './themes'
 
 interface InfoCasesProps {
@@ -21,7 +21,7 @@ const InfoCases: React.FC<InfoCasesProps> = ({
   countryName,
 }) => {
   return (
-    <LocalThemeProvider themes={themes}>
+    <ComponentThemeProvider themes={themes}>
       <>
         <h2>
           {countryName ? `${countryName} ` : 'Globally '}
@@ -51,7 +51,7 @@ const InfoCases: React.FC<InfoCasesProps> = ({
           <Icon iconType={iconTypes.trash} countryName={countryName} />
         )}
       </>
-    </LocalThemeProvider>
+    </ComponentThemeProvider>
   )
 }
 

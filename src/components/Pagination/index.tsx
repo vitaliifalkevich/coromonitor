@@ -6,7 +6,7 @@ import {
 } from 'components/PreloadedEntities/selectors'
 import { ListContainer, PaginationDot } from './styled'
 import themes from './themes'
-import LocalThemeProvider from 'styles/theme/LocalThemeProvider'
+import ComponentThemeProvider from 'styles/theme/ComponentThemeProvider'
 
 interface PaginationProps {
   countryName?: string
@@ -38,9 +38,9 @@ const Pagination: React.FC<PaginationProps> = ({ countryName }) => {
   }, [countriesToFollow, currentPage, countryName])
 
   return (
-    <LocalThemeProvider themes={themes}>
+    <ComponentThemeProvider themes={themes}>
       <ListContainer>{paginationDots}</ListContainer>
-    </LocalThemeProvider>
+    </ComponentThemeProvider>
   )
 }
 
