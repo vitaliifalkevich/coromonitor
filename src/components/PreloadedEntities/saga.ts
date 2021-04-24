@@ -6,24 +6,31 @@ import { PayloadAction } from '@reduxjs/toolkit'
 import { ICountry } from './types'
 import { getAllCountries } from './selectors'
 
-function* getFollowCountries(countries?: ICountry[]) {
-  const affectedCountries: ICountry[] = yield select(getAllCountries)
+export const prepareAffectedCountries = (countries: string[]): ICountry[] => {
+  return countries.map(country => ({
+    name: country,
+    isChosen: false,
+  }))
+}
 
-  const prepareCountries = (
-    countries: ICountry[],
-    followCountries: ICountry[],
-  ) =>
-    countries.map(country => {
-      if (followCountries.find(item => item.name === country.name))
-        return {
-          ...country,
-          isChosen: true,
-        }
+export const prepareCountriesAfterReadFromTizen = (
+  countries: ICountry[],
+  followCountries: ICountry[],
+) =>
+  countries.map(country => {
+    if (followCountries.find(item => item.name === country.name))
       return {
         ...country,
-        isChosen: false,
+        isChosen: true,
       }
-    })
+    return {
+      ...country,
+      isChosen: false,
+    }
+  })
+
+export function* getFollowCountries(countries?: ICountry[]) {
+  const affectedCountries: ICountry[] = yield select(getAllCountries)
 
   try {
     const result: string = yield call(readCountries)
@@ -31,30 +38,30 @@ function* getFollowCountries(countries?: ICountry[]) {
 
     yield put(
       actions.setAffectedCountries(
-        prepareCountries(affectedCountries, followedCountries),
+        prepareCountriesAfterReadFromTizen(
+          affectedCountries,
+          followedCountries,
+        ),
       ),
     )
   } catch (err) {
-    console.log('tizen api does not works in browser')
+    // tizen api does not works in browser
     const result =
       '[{"name":"USA","isChosen":true},{"name":"Brazil","isChosen":true}]'
     const followedCountries = countries ? countries : JSON.parse(result)
 
     yield put(
       actions.setAffectedCountries(
-        prepareCountries(affectedCountries, followedCountries),
+        prepareCountriesAfterReadFromTizen(
+          affectedCountries,
+          followedCountries,
+        ),
       ),
     )
   }
 }
 
-function* getCountriesFromApi() {
-  const prepareCountries = (countries: string[]): ICountry[] => {
-    return countries.map(country => ({
-      name: country,
-      isChosen: false,
-    }))
-  }
+export function* getCountriesFromApi() {
   try {
     const affectedResponse: AffectedCountriesResponse = yield call(
       getAffectedCountries,
@@ -63,7 +70,7 @@ function* getCountriesFromApi() {
     if (affectedResponse.status === 200) {
       yield put(
         actions.setAffectedCountries(
-          prepareCountries(affectedResponse.data.affected_countries),
+          prepareAffectedCountries(affectedResponse.data.affected_countries),
         ),
       )
       yield fork(getFollowCountries)
@@ -73,7 +80,7 @@ function* getCountriesFromApi() {
   }
 }
 
-function* followCountries(action: PayloadAction<ICountry[]>) {
+export function* followCountries(action: PayloadAction<ICountry[]>) {
   const countries = action.payload
   const countriesSerialized = JSON.stringify(countries)
   try {

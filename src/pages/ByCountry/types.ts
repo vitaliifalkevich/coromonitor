@@ -1,6 +1,4 @@
 export interface IResult {
-  country: string
-  latest_stat_by_country: string
   id: string
   country_name: string
   total_cases: string
@@ -10,7 +8,7 @@ export interface IResult {
   new_deaths: string
   total_recovered: string
   serious_critical: string
-  region: string
+  region: string | null
   total_cases_per1m: string
   record_date: string
   deaths_per1m: string

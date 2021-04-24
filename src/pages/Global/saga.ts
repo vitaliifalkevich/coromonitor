@@ -13,7 +13,7 @@ import { GlobalStaticResponse } from 'api/types'
 import { IGlobalResult } from './types'
 import { getGlobalStatisticResults } from './selectors'
 
-function* getStatistic() {
+export function* getStatistic() {
   try {
     const response: GlobalStaticResponse = yield call(getGlobalStatistic)
     if (response.status === 200) {
@@ -24,7 +24,7 @@ function* getStatistic() {
   }
 }
 
-function* getFakeButActualStatistic() {
+export function* getFakeButActualStatistic() {
   const currentStatistic: IGlobalResult = yield select(
     getGlobalStatisticResults,
   )

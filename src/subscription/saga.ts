@@ -7,7 +7,7 @@ import config from 'config'
 import { PayloadAction } from '@reduxjs/toolkit'
 const { ONE_MONTH } = config
 
-function* getItemsForPurchasing() {
+export function* getItemsForPurchasing() {
   const availableTestItems = [
     {
       mItemName: '1 month',
@@ -33,19 +33,20 @@ function* getItemsForPurchasing() {
     if (!window.tizen) {
       yield put(actions.setItemsForPurchasing(availableTestItems))
     } else {
-      yield put(actions.setErrorItemsForPurchasing(err.message))
+      yield put(actions.setErrorItemsForPurchasing(err))
     }
   }
 }
 
-function* checkPurchasedItem() {
+export function* checkPurchasedItem() {
   try {
     const response: ISuccessItem[] = yield call(getPurchasedList, ONE_MONTH)
+
     if (response.length > 0) {
       yield put(
         actions.successCheckingPurchased({
-          haveSubscription: !isAfter(
-            Number(response[0].mSubscriptionEndDate),
+          haveSubscription: isAfter(
+            new Date(response[0].mSubscriptionEndDate),
             new Date(),
           ),
           mayTrial: false,
@@ -66,11 +67,11 @@ function* checkPurchasedItem() {
           mayTrial: true,
         }),
       )
-    } else yield put(actions.errorCheckingPurchased(err.message))
+    } else yield put(actions.errorCheckingPurchased(err))
   }
 }
 
-function* payProcess(action: PayloadAction<string>) {
+export function* payProcess(action: PayloadAction<string>) {
   try {
     yield call(pay, action.payload)
     yield put(actions.successPaymentProcess())
@@ -90,7 +91,7 @@ function* payProcess(action: PayloadAction<string>) {
         }),
       )
     } else {
-      yield put(actions.errorPaymentProcess(err.message))
+      yield put(actions.errorPaymentProcess(err))
     }
   }
 }

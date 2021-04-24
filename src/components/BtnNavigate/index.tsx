@@ -9,7 +9,7 @@ import ComponentThemeProvider from 'styles/theme/ComponentThemeProvider'
 
 interface ButtonProps {
   btnType: string
-  countryName: string
+  countryName?: string
 }
 const BtnNavigate: React.FC<ButtonProps> = ({ btnType, countryName }) => {
   const dispatch = useDispatch()
@@ -26,7 +26,7 @@ const BtnNavigate: React.FC<ButtonProps> = ({ btnType, countryName }) => {
       )
     } else {
       history.push(`/`)
-      actions.changeCurrentPage(0)
+      dispatch(actions.changeCurrentPage(0))
     }
   }, [history, dispatch, countryName, countriesToFollow])
 

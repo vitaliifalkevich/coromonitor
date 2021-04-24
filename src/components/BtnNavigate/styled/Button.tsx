@@ -5,9 +5,13 @@ const prevStyles = css`
   span {
     margin-left: 9.2em;
   }
+  &:active,
+  &:focus,
   &:hover {
     left: -8.3em;
   }
+  &:active span,
+  &:focus span,
   &:hover span {
     margin-left: 8.2em;
   }
