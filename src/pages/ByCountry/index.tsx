@@ -51,8 +51,8 @@ const ByCountry: React.FC = () => {
 
   const onDoubleTap = useDoubleTap(() => {
     if (!limitState) {
-      setLimitState(new Date())
       dispatch(actions.getStatisticByCountry(countryName))
+      setLimitState(new Date())
     } else {
       let compare = differenceInSeconds(new Date(), limitState)
       if (compare > LIMIT_REQUEST_TIME) {
